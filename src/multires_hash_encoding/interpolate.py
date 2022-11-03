@@ -13,7 +13,7 @@ def nd_corners(d: int, dtype: Optional[dtype]=None, device: Optional[device]=Non
     with d=2 will generate 4 coordinates, for d=3 will generate 8 coordinates, etc ...
     """
     xi = [torch.arange(2, dtype=dtype, device=device) for i in range(d)]
-    corners = torch.stack(torch.meshgrid(*xi, indexing='ij'), -1)
+    corners = torch.stack(torch.meshgrid(*xi), -1)
     return corners.reshape(1, 2**d, d)
 
 
