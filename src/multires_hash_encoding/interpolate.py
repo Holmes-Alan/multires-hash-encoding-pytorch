@@ -31,7 +31,10 @@ def nearest_index_fn(i: Tensor, shape: Size):
     """ Replaces out of bounds index with the nearest valid index """
     high = torch.tensor(shape, dtype=i.dtype, device=i.device)
     low = torch.zeros_like(high)
-    return i.clamp(low, high - 1)
+    # return i.clamp(low, high - 1)
+    i = torch.where(i > high - 1, high - 1, i)
+    i = torch.where(i < low, low, i)
+    return i
 
 
 def nd_linear_interp(
